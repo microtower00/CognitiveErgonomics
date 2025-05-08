@@ -38,9 +38,8 @@ if (file.exists("data.csv")) {
     # Extract all the columns with a G in the column name 
 
     # Vector containing the column names of Google related stuff
-    google_columns <- c("F.Google", "Purp.Google", "AVG.MGT", "AVG.MGP")
 
-    g_columns <- grep("G", colnames(df), value = TRUE)
+    g_columns <-c("F.Google", "Purp.Google", "AVG.MGT", "AVG.MGP", "AVG.TGT", "AVG.TGP")
     print("Google columns:")
     print(g_columns)
     google_data <- df[, g_columns]
@@ -48,12 +47,40 @@ if (file.exists("data.csv")) {
     # print(head(google_data))
 
     # Extract all the columns with a C in the column name
-    c_columns <- grep("C", colnames(df), value = TRUE)
+    c_columns <- c("F.Chat", "Purp.Chat", "AVG.MCT", "AVG.MCP", "AVG.TCT", "AVG.TCP")
     print("ChatGPT columns:")
     print(c_columns)
 
     chat_data <- df[, c_columns]
     print(head(chat_data))
+
+    # Put demographics and all parsed data back togheter and export to csv
+    df_clean <- cbind(demographic_data, google_data, chat_data)
+    print("Cleaned data:")
+    print(head(df_clean))
+    write.csv(df_clean, "cleaned_data.csv", row.names = FALSE)
+
+
+
+    # Age,Gender,Education,employment,F-Chat,Purp-Chat,F-Google,Purp-Google,AVG-MGT,AVG-MGP,AVG-MCT,AVG-MCP,AVG-MTG,AVG-TGP,AVG-TCT,AVG-TCP
+    # F-Chat: frequency of using ChatGPT
+    # Purp-Chat: purpose of using ChatGPT
+    # F-Google: frequency of using Google
+    # Purp-Google: purpose of using Google
+    # AVG-MGT: Average-MedicalGoogleTrust, trust in Google for medical purposes
+    # AVG-MGP: Average-MedicalGooglePreference. Preference of Google for medical purposes
+    # AVG-MCT: Average-MedicalChatGPTTrust, trust in ChatGPT for medical purposes
+    # AVG-MCP: Average-MedicalChatGPTPreference, preference of ChatGPT for medical purposes
+    # AVG-TGT: Average-TripGoogleTrust, trust in Google for trip planning purposes
+    # AVG-TGP: Average-TripGooglePreference, preference of Google for trip planning purposes
+    # AVG-TCT: Average-TripChatGPTTrust, trust in ChatGPT for trip planning purposes
+    # AVG-TCP: Average-TripChatGPTPreference, preference of ChatGPT for trip planning purposes
+
+
+
+
+
+
 
 } else {
   # File does not exist, log an error
