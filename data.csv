@@ -1,4 +1,4 @@
-Age,Gender,Education,employment,F-Chat,Purp-Chat,F-Google,Purp-Google,AVG-MGT,AVG-MGP,AVG-MCT,AVG-MCP,AVG-TGT,AVG-TGP,AVG-TCT,AVG-TCP
+Age,Gender,Education,Employment,F-Chat,Purp-Chat,F-Google,Purp-Google,AVG-MGT,AVG-MGP,AVG-MCT,AVG-MCP,AVG-TGT,AVG-TGP,AVG-TCT,AVG-TCP
 23,Male,Bachelor's degree,Student,Daily,Educational purposes; Recommendations,Daily,Educational purposes; Professional purposes; Self-development; Recommendations; Medical advice,"3,73","3,6","3,27",3,"4,64","3,65","3,64","3,4"
 24,Female,Bachelor's degree,Unemployed,Weekly,Educational purposes; Professional purposes; Self-development,Rarely,Educational purposes; Professional purposes,"2,18","2,2",3,"2,2","3,45","2,61","3,27","3,6"
 24,Male,Bachelor's degree,Student,Rarely,Educational purposes; Self-development,Daily,Educational purposes; Self-development,"3,55","3,4","3,27","2,4","3,45","3,21","3,36","2,6"

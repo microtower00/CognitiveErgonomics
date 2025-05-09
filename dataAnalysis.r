@@ -9,7 +9,8 @@ if (file.exists("data.csv")) {
   print("Column names:")
   print(colnames(df))
   
-  
+  #---------------------------------------PARSING DATA---------------------------------------
+  #=======================================FREQUENCY========================================
   # Access the F.Google column and parse to int
   if ("F.Google" %in% colnames(df)) {
     f_google_data <- df$F.Google
@@ -24,9 +25,20 @@ if (file.exists("data.csv")) {
         f_chat_data <- df$F.Chat
 
         # "Daily" -> 1,  "Weekly" -> 2, "Monthly" ->3, "Rarely" -> 4,
-        # parse the F.Chat column to int according to the comment and then replace it in the main data thinghy
         df$F.Chat <- as.integer(factor(df$F.Chat, levels = c("Daily", "Weekly", "Monthly", "Rarely"), labels = 1:4))
     }
+    #=======================================EDUCATION========================================
+    # Access the Education column and parse to int
+    education_data <- df$Education
+
+    # "High school" -> 1,  "Bachelor's degree" -> 2, "Master's degree" ->3, "PhD" -> 4,
+    df$Education <- as.integer(factor(df$Education, levels = c("High school", "Bachelor's degree", "Master's degree", "PhD"), labels = 1:4))
+    #=======================================EMPLOYEMENT========================================
+    # Access the Employment column and parse to int
+    employment_data <- df$Employment
+    # "Unemployed" -> 1,  "Student" -> 2, "Employed" ->3,
+    df$Employment <- as.integer(factor(df$Employment, levels = c("Unemployed", "Student", "Employed"), labels = 1:3))  
+
 
     # Parse the gender column to int and replace it in the main data thinghy
     gender_data <- df$Gender
@@ -79,10 +91,7 @@ if (file.exists("data.csv")) {
 
 
 
-
-
-
-} else {
+  }else {
   # File does not exist, log an error
-  print("File not found.")
+  # print("File not found.")
 }
