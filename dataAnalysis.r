@@ -80,6 +80,14 @@ if (file.exists("data.csv")) {
 
   # Combine demographics and parsed data and export to CSV
   df_clean <- cbind(demographic_data, google_data, chat_data)
+  df_clean[] <- lapply(df_clean, function(col) {
+  if (is.character(col)) {
+    as.numeric(gsub(",", ".", col))
+  } else {
+    col
+  }
+})
+
   print("Cleaned data:")
   print(head(df_clean))
   write.csv(df_clean, "cleaned_data.csv", row.names = FALSE)
