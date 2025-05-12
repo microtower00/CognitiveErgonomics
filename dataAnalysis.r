@@ -28,7 +28,7 @@ if (file.exists("data.csv")) {
 
   # Access and parse the F.Chat column
   if ("F.Chat" %in% colnames(df)) {
-    f_chat_data <- df$F.Chat
+    # f_chat_data <- df$F.Chat
     df$F.Chat <- as.integer(factor(df$F.Chat, 
                                    levels = c("Daily", "Weekly", "Monthly", "Rarely"), 
                                    labels = 1:4))
@@ -44,11 +44,11 @@ if (file.exists("data.csv")) {
   
   #=======================================EMPLOYMENT========================================
   # Access and parse the Employment column
+  df$Employment[df$Employment == "Homemaker"] <- "Unemployed"
   # "Unemployed" -> 1, "Student" -> 2, "Employed" -> 3
-  employment_data <- df$Employment
   df$Employment <- as.integer(factor(df$Employment, 
-                                    levels = c("Unemployed", "Student", "Employed"), 
-                                    labels = 1:3))  
+                                     levels = c("Unemployed", "Student", "Employed"), 
+                                     labels = 1:3)) 
 
   #=======================================GENDER========================================
   # Parse the gender column
@@ -58,7 +58,7 @@ if (file.exists("data.csv")) {
                                labels = 1:3))
 
   # Extract demographic data (first 6 columns)
-  demographic_data <- df[, 1:5]
+  demographic_data <- df[, 1:4]
   print("Demographic data:")
   print(head(demographic_data))
 
@@ -80,7 +80,7 @@ if (file.exists("data.csv")) {
 
   # Combine demographics and parsed data and export to CSV
   df_clean <- cbind(demographic_data, google_data, chat_data)
-  print("-------------------------------Cleaned data:")
+  print("Cleaned data:")
   print(head(df_clean))
   write.csv(df_clean, "cleaned_data.csv", row.names = FALSE)
 
