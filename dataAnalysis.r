@@ -4,6 +4,9 @@ if (file.exists("data.csv")) {
   # File exists, load it into df
   df <- read.csv("data.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
   print("File opened successfully.")
+
+  # Remove the columns "Purp.Google" and "Purp.Chat" from the data frame
+  df <- df[, !colnames(df) %in% c("Purp-Google", "Purp-Chat")]
   
   # Print the column names properly
   print("Column names:")
@@ -54,27 +57,33 @@ if (file.exists("data.csv")) {
                                levels = c("Male", "Female", "Non-binary / Third gender"), 
                                labels = 1:3))
 
-  # Extract demographic data (first 8 columns)
-  demographic_data <- df[, 1:8]
+  # Extract demographic data (first 6 columns)
+  demographic_data <- df[, 1:5]
+  print("Demographic data:")
+  print(head(demographic_data))
+
+
 
   # Define and extract Google-related columns
-  g_columns <- c("F.Google", "Purp.Google", "AVG.MGT", "AVG.MGP", "AVG.TGT", "AVG.TGP")
+  g_columns <- c("F.Google", "AVG.MGT", "AVG.MGP", "AVG.TGT", "AVG.TGP")
   print("Google columns:")
   print(g_columns)
   google_data <- df[, g_columns]
 
   # Define and extract ChatGPT-related columns
-  c_columns <- c("F.Chat", "Purp.Chat", "AVG.MCT", "AVG.MCP", "AVG.TCT", "AVG.TCP")
+  c_columns <- c("F.Chat",  "AVG.MCT", "AVG.MCP", "AVG.TCT", "AVG.TCP")
   print("ChatGPT columns:")
   print(c_columns)
   chat_data <- df[, c_columns]
   print(head(chat_data))
 
+
   # Combine demographics and parsed data and export to CSV
   df_clean <- cbind(demographic_data, google_data, chat_data)
-  print("Cleaned data:")
+  print("-------------------------------Cleaned data:")
   print(head(df_clean))
   write.csv(df_clean, "cleaned_data.csv", row.names = FALSE)
+
 
   # Column descriptions for reference:
   # Age,Gender,Education,employment,F-Chat,Purp-Chat,F-Google,Purp-Google,AVG-MGT,AVG-MGP,AVG-MCT,AVG-MCP,AVG-MTG,AVG-TGP,AVG-TCT,AVG-TCP
